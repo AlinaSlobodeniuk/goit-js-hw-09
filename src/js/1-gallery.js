@@ -1,6 +1,5 @@
 import SimpleLightbox from 'simplelightbox';
-// import SimpleLightbox from "simplelightbox/dist/simple-lightbox.esm";
-// import SimpleLightbox from "simplelightbox/dist/simple-lightbox.min.css";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 
 const images = [
@@ -80,28 +79,32 @@ gallery.insertAdjacentHTML("beforeend", createMarkup(images));
 function createMarkup(array) {
   return array.map((item) => `
 <li class="gallery-item">
-  <a class="gallery-link" href="${item.original}">
+  <a class="gallery-link" href="large-image.jpg">
     <img
       class="gallery-image"
-      src="${item.preview}"
-      data-source="${item.original}"
-      alt="${item.description}"
+      src="small-image.jpg"
+      alt="Image description"
     />
   </a>
 </li>
   `).join("");
-  }
+}
 
-function handleClick(event) {
-  event.preventDefault();
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
+// function handleClick(event) {
+//   event.preventDefault();
   
-  if (event.target.nodeName !== "IMG") {
-    return
-  };
-
-  const sourceImage = event.target.dataset.source;
-  console.log(sourceImage);
-  const image = images.find((item) => item.original === sourceImage);
+//   if (event.target.nodeName !== "IMG") {
+//     return
+//   };
+  
+  // const sourceImage = event.target.dataset.source;
+  // console.log(sourceImage);
+  // const image = images.find((item) => "large-image.jpg" === sourceImage);
   
 //   const instance = basicLightbox.create(`
 //    <div class = "modal">
@@ -109,11 +112,13 @@ function handleClick(event) {
 //    </div>
     //     `);
     
-let instance = new SimpleLightbox('.images');
-instance.on('show.simplelightbox', function() {
-	image.next().captionDelay(250).captionData()
-});
+// let instance = new SimpleLightbox('.images');
+// instance.on('show.simplelightbox', function() {
+// 	image.next().captionDelay(250).captionData()
+// });
 
-  gallery.show();
+  // instance.show();
 
-}
+
+
+// }
